@@ -66,8 +66,8 @@ export default function HomeScreen() {
     socket.on('connect',()=>{
       console.log('Backend connected:', socket.id);
     });
-    socket.on('newLead',(metaLeads)=>{
-      setLeads(prevLeads=>[...metaLeads,prevLeads]);
+    socket.on('newLead', (metaLeads) => {
+      setLeads((prevLeads) => [metaLeads, ...prevLeads]);
     });
     return ()=>{
       socket.disconnect();
