@@ -1,56 +1,159 @@
-# Welcome to your Expo app 👋
+# Meta Leads App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a React Native app that shows leads from Meta Lead Ads. When a new test lead comes in, the app gets the details away. No need to refresh the screen.
 
-## Get started
+## How it works
 
-1. Install dependencies
+1. A test lead is made using the Meta Lead Ads Testing Tool.
 
-   ```bash
-   npm install
-   ```
+2. Meta sends a webhook message to the backend.
 
-2. Start the app
+3. The backend uses the Meta Graph API to get the details.
 
-   ```bash
-   npx expo start
-   ```
+4. The backend sends the details to the mobile app using Socket.IO.
 
-In the output, you'll find options to open the app in a
+5. The new lead shows up in the app automatically.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Tech Stack
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **Frontend:** React Native, Expo
 
-## Get a fresh project
+- **Backend:** Node.js, Express
 
-When you're ready, run:
+- **Real-time communication:** Socket.IO
 
-```bash
-npm run reset-project
+- **API:** Meta Graph API
+
+- **Testing:** Meta Lead Ads Testing Tool,
+
+## Project Structure
+
+```text
+
+Meta-leads-app/
+
+├── src/              # Mobile application screens
+
+|   └──app
+
+|      └──index.tsx
+
+├── assets/           # Images and other assets
+
+├── backend/          # Backend server and webhook handling
+
+├── package.json
+
+└── README.md
+
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+## Getting Started
 
-### Other setup steps
+### Prerequisites
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+- Node.js and npm
 
-## Learn more
+- Expo Go on an Android or iOS device
 
-To learn more about developing your project with Expo, look at the following resources:
+- Meta Developer account
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- ngrok
 
-## Join the community
+### 1. Clone the repository
 
-Join our community of developers creating universal apps.
+```bash
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+git clone https://github.com/Meera2906/Meta-leads-app.git
+
+cd Meta-leads-app
+
+```
+
+### 2. Install dependencies
+
+Run this command to install everything needed for the app and backend.
+
+```bash
+
+npm install
+
+```
+
+### 3. Configure environment variables
+
+Create a `.env` file inside the backend folder and add these lines:
+
+```env
+
+PORT=3000
+
+VERIFY_TOKEN=your_verify_token
+
+PAGE_ACCESS_TOKEN=your_page_access_token
+
+```
+
+Replace the placeholder values with your tokens. Do not commit this file to GitHub.
+
+### 4. Start the backend
+
+Go to the backend folder and run:
+
+```bash
+
+cd backend
+
+npm install
+
+npm start
+
+```
+
+### 5. Start the Expo app
+
+Open another window in the project folder and run:
+
+```bash
+
+npx expo start
+
+```
+
+Then scan the QR code using the Expo Go app.
+
+## Testing
+
+1. Start both the backend and the mobile app.
+
+2. Use ngrok to expose the backend webhook.
+
+3. Set the webhook callback URL in the Meta Developer Dashboard.
+
+4. Use the Meta Lead Ads Testing Tool to create a test lead.
+
+5. Check if the new lead appears in the app without refreshing.
+
+## Assumptions
+
+- The Meta Lead Ads Testing Tool is used for testing, not ads.
+
+- The Meta Page and Lead Form are already set up.
+
+- The backend has a Page Access Token with the right permissions.
+
+- The mobile device and backend can talk to each other over the network.
+
+## Limitations
+
+- This app is meant to show how real-time lead retrieval works.
+
+- There’s no storage for leads unless a database is added.
+
+- You need a working internet connection. Correct Meta credentials.
+
+## Author
+
+**Meera Fareena**
+
+GitHub: [Meera2906](https://github.com/Meera2906)
