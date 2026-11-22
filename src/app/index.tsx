@@ -28,6 +28,32 @@ function getDevMenuHint() {
   );
 }
 
+// creating a Typscript alias type
+type Lead ={
+  id: string;
+  full_name: string;
+  email_id: string;
+  phone_no: string;
+  createdAt:string;
+}
+
+// creating a sample lead object
+const sampleLeads : Lead[] =[
+  {
+    id: '000001',
+    full_name: 'Test1',
+    email_id: 'test1@meta.com',
+    phone_no: '1234512340',
+    createdAt: '2026-11-22',
+  },
+  {
+    id: '000002',
+    full_name: 'Test2',
+    email_id: 'test2@meta.com',
+    phone_no: '1234512341',
+    createdAt: '2026-11-22',
+  }
+]
 export default function HomeScreen() {
   return (
     <ThemedView style={styles.container}>
