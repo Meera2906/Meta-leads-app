@@ -59,16 +59,6 @@ const sampleLeads : Lead[] =[
 export default function HomeScreen() {
   const [metaLeads, setLeads] = useState<Lead[]>(sampleLeads);
 
-  function simulateALead(){
-    const newLead: Lead = {
-      id:Date.now().toString(),
-      full_name: 'Test3',
-      email_id: 'test3@meta.com',
-      phone_no: '1234512342',
-      createdAt: '2026-11-22',
-    }
-    setLeads(metaLeads=>[...metaLeads,newLead]);
-  }
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
@@ -81,9 +71,6 @@ export default function HomeScreen() {
             Leads
           </ThemedText>
         </ThemedView>
-
-        {/* Simulating a lead */}
-        <Button title="Simulate" onPress={simulateALead}/>
 
         {/* Displaying the leads in the expo app */}
         <FlatList
