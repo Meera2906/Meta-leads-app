@@ -1,5 +1,5 @@
 import * as Device from 'expo-device';
-import { FlatList, Platform, StyleSheet, View } from 'react-native';
+import { FlatList, Platform, StyleSheet, View, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AnimatedIcon } from '@/components/animated-icon';
@@ -59,6 +59,16 @@ const sampleLeads : Lead[] =[
 export default function HomeScreen() {
   const [metaLeads, setLeads] = useState<Lead[]>(sampleLeads);
 
+  function simulateALead(){
+    const newLead: Lead = {
+      id:Date.now().toString(),
+      full_name: 'Test3',
+      email_id: 'test3@meta.com',
+      phone_no: '1234512342',
+      createdAt: '2026-11-22',
+    }
+    setLeads(metaLeads=>[...metaLeads,newLead]);
+  }
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
@@ -72,6 +82,10 @@ export default function HomeScreen() {
           </ThemedText>
         </ThemedView>
 
+        {/* Simulating a lead */}
+        <Button title="Simulate" onPress={simulateALead}/>
+
+        {/* Displaying the leads in the expo app */}
         <FlatList
             style = {{width:"100%",flex:1}}
 
