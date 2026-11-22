@@ -30,6 +30,11 @@ app.get('/webhook', (request, response)=>{
     }
 });
 
+app.post('/webhook', (request, response)=>{
+    console.log(JSON.stringify(request.body,null,2));
+    response.sendStatus(200);
+});
+
 server.listen(port, () =>{
     console.log(`Server runnning at ${port}`);
 });
