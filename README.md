@@ -1,6 +1,6 @@
 # Meta Leads App
 
-This is a React Native app that shows leads from Meta Lead Ads. When a new test lead comes in, the app gets the details away. No need to refresh the screen.
+This is a React Native app that shows leads from Meta Lead Ads. When a new test lead comes in, the app gets the details right away. No need to refresh the screen.
 
 ## How it works
 
@@ -104,9 +104,7 @@ Go to the backend folder and run:
 
 cd backend
 
-npm install
-
-npm start
+node server.js
 
 ```
 
