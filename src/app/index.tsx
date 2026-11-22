@@ -10,6 +10,7 @@ import { WebBadge } from '@/components/web-badge';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 
 import { useEffect, useState } from 'react';
+import { io } from 'socket.io-client';
 
 function getDevMenuHint() {
   if (Platform.OS === 'web') {
@@ -58,6 +59,20 @@ const sampleLeads : Lead[] =[
 ]
 export default function HomeScreen() {
   const [metaLeads, setLeads] = useState<Lead[]>(sampleLeads);
+  // connected to backend server
+
+  useEffect(()=>{
+    const socket = io('http://192.168.1.18:3000') // Ipv4 address
+    socket.on('connect',()=>{
+      console.log('Backend connected:', socket.id);
+    });
+    socket.on('newLead',(metaLeads)=>{
+      setLeads(prevLeads=>[...metaLeads,prevLeads]);
+    });
+    return ()=>{
+      socket.disconnect();
+    };
+  }, []);
 
   return (
     <ThemedView style={styles.container}>
