@@ -1,5 +1,5 @@
 import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
+import { FlatList, Platform, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AnimatedIcon } from '@/components/animated-icon';
@@ -8,6 +8,8 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { WebBadge } from '@/components/web-badge';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+
+import { useEffect, useState } from 'react';
 
 function getDevMenuHint() {
   if (Platform.OS === 'web') {
@@ -55,6 +57,8 @@ const sampleLeads : Lead[] =[
   }
 ]
 export default function HomeScreen() {
+  const [metaLeads, setLeads] = useState<Lead[]>(sampleLeads);
+
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
@@ -67,6 +71,21 @@ export default function HomeScreen() {
             Leads
           </ThemedText>
         </ThemedView>
+
+        <FlatList
+            style = {{width:"100%",flex:1}}
+
+            data={metaLeads}
+            keyExtractor={(item)=>item.id}
+            renderItem={({item})=>(
+              <View style={styles.leadcards}>
+                <ThemedText style={styles.leadname}>{item.full_name}</ThemedText>
+                <ThemedText>{item.email_id}</ThemedText>
+                <ThemedText>{item.phone_no}</ThemedText>
+                <ThemedText>{item.createdAt}</ThemedText>
+              </View>
+            )}
+          />
 
         {Platform.OS === 'web' && <WebBadge />}
       </SafeAreaView>
@@ -114,4 +133,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 25,
   },
+  leadcards: {
+    padding:16,
+    marginBottom:12,
+    borderRadius:12,
+    backgroundColor: "#4d4c4c",
+  },
+  leadname: {
+    fontWeight: 'bold',
+    fontSize: 22,
+  }
 });
